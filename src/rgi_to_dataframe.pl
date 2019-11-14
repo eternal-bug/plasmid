@@ -68,6 +68,10 @@ for my $file ( @files ){
             $hash{$prefix}{$gene} = 1;
         }
     }
+    
+    if( not exists $hash{$prefix} and defined $contain_all ){
+        $hash{$prefix} = 0;
+    }
 
     close $f;
 }
