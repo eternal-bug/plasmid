@@ -2,7 +2,7 @@
 # Function: Transform the Rgi result to a dataframe.
 # Author: eternal-bug
 # First edit: 2019-11-07
-# Last  edit: 2019-11-07
+# Last  edit: 2019-11-14
 
 use strict;
 use warnings;
@@ -13,8 +13,28 @@ use Getopt::Long;
 my $arguments = GetOptions(
     "i|input=s"     =>\( my $input ),
     "o|output:s"    =>\( my $output),
+    "contain_all"   =>\( my $contain_all ), 
     "h|help"        =>\( my $help ),
 );
+
+sub usage {
+    my $help = "
+    
+    perl $0 -i [PATH] -o [OUTPUT] ( --contain_all )
+    
+    -i|--input      the rgi result( .txt file path )
+    
+    -o|--output     the output file.
+    
+    --contain_all   contain all samples even if which's count of all gene are 0.
+    
+    --help
+    
+"
+    return $help;
+}
+
+if $help die usage();
 
 # first find the rgi file
 my @files = File::Find::Rule->file()->maxdepth( 1 )->name("*.txt")->in( $input );
