@@ -39,7 +39,7 @@ parallel -j 6 '
 
 + do something to the annotation
 
-discard annotation two times gene( keep rgi gene )
+discard annotation two times gene( keep rgi gene ), but the name between the rgi and prokka is different. So it depend on the gene scale to decide.
 
 ```bash
 
