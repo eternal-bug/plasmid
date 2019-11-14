@@ -3,13 +3,25 @@
 
 ## rgi
 
++ run rgi
+
 ```bash
-cd cd ~/data/bacteria/plasmid/rgi
+cd ~/data/bacteria/plasmid/rgi
 
 parallel -j 4 '
   prefix=$( basename {1} | sed 's/\.fa//' )
   rgi main -i {1} -o $prefix -t contig -a DIAMOND -n 4 --clean
 ' ::: $( ls ../data/*.fa )
+```
+
++ merge rgi result
+
+```
+cd ~/data/bacteria/plasmid/result
+mkdir rgi
+cd rgi
+
+perl ../../src/rgi_to_dataframe.pl -i ../../rgi -o ./result.tsv
 ```
 
 ## prokka
