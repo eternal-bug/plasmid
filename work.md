@@ -1,7 +1,7 @@
 # work
 
 
-## Rgi
+## rgi
 
 ```bash
 cd cd ~/data/bacteria/plasmid/rgi
@@ -23,3 +23,12 @@ parallel -j 6 '
 ' ::: $( ls ../data/*.fa )
 ```
 
+## merge rgi and prokka data
+
++ discard the type annotation of prokka 
+
+discard annotation two times gene( contain rgi gene )
+
+```bash
+
+```
