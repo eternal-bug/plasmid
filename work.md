@@ -37,9 +37,9 @@ parallel -j 6 '
 
 ## merge rgi and prokka data
 
-+ discard the type annotation of prokka 
++ do something to the annotation
 
-discard annotation two times gene( contain rgi gene )
+discard annotation two times gene( keep rgi gene )
 
 ```bash
 
