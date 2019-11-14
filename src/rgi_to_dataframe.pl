@@ -34,7 +34,7 @@ sub usage {
     return $help;
 }
 
-if $help die usage();
+die usage() if $help;
 
 # first find the rgi file
 my @files = File::Find::Rule->file()->maxdepth( 1 )->name("*.txt")->in( $input );
@@ -70,7 +70,7 @@ for my $file ( @files ){
     }
     
     if( not exists $hash{$prefix} and defined $contain_all ){
-        $hash{$prefix} = 0;
+        $hash{$prefix} = {};
     }
 
     close $f;
