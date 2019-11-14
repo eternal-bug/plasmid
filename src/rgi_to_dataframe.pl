@@ -12,12 +12,12 @@ use Getopt::Long;
 
 my $arguments = GetOptions(
     "i|input=s"     =>\( my $input ),
-    "o|output:s"    =>\( my $output = "result.tsv" )
+    "o|output:s"    =>\( my $output),
     "h|help"        =>\( my $help ),
 );
 
 # first find the rgi file
-my @files = File::Find::Rule->file()->name("*.txt")->in( $input );
+my @files = File::Find::Rule->file()->maxdepth( 1 )->name("*.txt")->in( $input );
 
 # all gene
 my %genes = (); 
@@ -33,7 +33,7 @@ for my $file ( @files ){
 
     open my $f, "<", $file or die $!;
     my $n = 0;
-    while(my $read = <$r>){
+    while(my $read = <$f>){
         $n++;
         chomp($read);
         # first is header
@@ -54,8 +54,16 @@ for my $file ( @files ){
 
 my @genes = sort { $a cmp $b } keys %genes;
 
-print join("\t", "samples", @genes) . "\n";
+my $out_fh;
+if( not defined $output ){
+    $out_fh = *STDOUT{IO};
+}else{
+    open my $write_h, ">", $output or die $!;
+    $out_fh = $write_h;
+}
+
+print {$out_fh} join("\t", "samples", @genes) . "\n";
 for my $s ( sort { $a cmp $b } keys %hash ){
     my @nums = map { if( exists $hash{$s}{$_} ){ 1 }else{ 0 } } @genes;
-    print join("\t", $s, @nums) . "\n";
+    print {$out_fh} join("\t", $s, @nums) . "\n";
 }
