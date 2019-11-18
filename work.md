@@ -44,3 +44,16 @@ discard annotation two times gene( keep rgi gene ), but the name between the rgi
 ```bash
 
 ```
+
+## clust
+
+```
+~/Applications/biosoft/MeShClust/bin/meshclust \
+  total.fa \
+  --kmer 3 \
+  --id 0.90 \
+  --delta 20 \
+  --output ./MeShClust/out.clstr \
+  --sample 5000 \
+  --threads 14
+```
